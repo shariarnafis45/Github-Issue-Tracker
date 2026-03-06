@@ -20,12 +20,52 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Font awosome  -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-     <!-- CSS file  -->
-      <link rel="stylesheet" href="styles/style.css">
+    <!-- CSS file  -->
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <body>
-    <h2 class="">Hello World</h2>
+  <body class="">
+    <main class="">
+      <!-- Login  -->
+      <section class="max-w-[450px] mx-auto bg-white my-20 shadow-xl p-12">
+        <div>
+          <!-- login head -->
+          <div class="">
+            <span class="text-8xl flex justify-center"
+              ><i class="fa-brands fa-github text-center"></i
+            ></span>
+            <div class="text-center mt-5">
+              <h2 class="text-2xl font-semibold">GitHub Issues Tracker</h2>
+              <p class="text-gray-500">Sign in to manage your issues</p>
+            </div>
+          </div>
+          <!-- login form  -->
+          <div class="mt-6">
+            <fieldset
+              class="fieldset  rounded-box w-full  p-4 mx-auto"
+            >
+              <label class="label text-black text-[0.9rem]">Username</label>
+              <input type="text" class="input focus:outline-none" placeholder="Enter Username" />
+
+              <label class="label text-black text-[0.9rem]">Password</label>
+              <input
+                type="password"
+                class="input focus:outline-none"
+                placeholder="Enter Password"
+              />
+
+              <button class="btn btn-primary mt-4">Sign In</button>
+            </fieldset>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
