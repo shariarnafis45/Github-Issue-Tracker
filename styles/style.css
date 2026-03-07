@@ -28,3 +28,34 @@
     background-color: #EEEFF2;
     color:  #9CA3AF;
 }
+
+.label-bug {
+    background-color: #FEECEC;
+    outline: 1px solid #FECACA;
+    color: #EF4444;
+}
+.label-help {
+    background-color: #FFF8DB;
+    outline: 1px solid #FDE68A;
+    color: #D97706;
+}
+.label-enhancement {
+    background-color: #DEFCE8;
+    outline: 1px solid #BBF7D0;
+    color: #00A96E;
+}
+.label-documentation {
+    background-color: #DBEAFE;
+    outline: 1px solid #cadaf3;
+    color: #3B82F6;
+}
+.label-first-issue {
+    background-color: #D1FAE5;
+    outline: 1px solid #ccfcec;
+    color: #10B981;
+}
+
+.default-label{
+    background-color: #6B7280;
+    color: rgb(16, 15, 15);
+}

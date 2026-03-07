@@ -9,8 +9,8 @@ const manageCardCount = () => {
 const createElement = (arr) => {
   const element = arr.map(
     (el) => `
-        <div class="badge badge-soft badge-error">
-            <span class="bug-btn hidden"><i class="fa-solid fa-bug"></i></span>
+        <div class="badge badge-soft badge-error label-badge mr-1.5">
+            <span class="btn-bug hidden"><i class="fa-solid fa-bug"></i></span>
             <span class="help-btn hidden"
             ><i class="fa-solid fa-life-ring"></i
             ></span>
@@ -88,7 +88,7 @@ const displayAllIssues = (issues) => {
             </div>
           </div>
         `;
-    cardContainer.appendChild(card);
+    
     // border add
     if (`${issue.status}` === "open") {
       card.classList.add("border-open");
@@ -106,6 +106,35 @@ const displayAllIssues = (issues) => {
     } else {
       card.querySelector(".priority-badge").classList.add("priority-low");
     }
+
+    // label style & icon controll
+    const labelBadges = card.querySelectorAll('.label-badge');
+    labelBadges.forEach(labelBadge => {
+        const labelBadgeText = labelBadge.textContent.trim().toLocaleLowerCase();
+        if(labelBadgeText === 'bug'){
+            labelBadge.classList.add('label-bug');
+            labelBadge.querySelector('.btn-bug').classList.remove('hidden')
+        }else if(labelBadgeText === 'help wanted'){
+            labelBadge.classList.add('label-help');
+            labelBadge.querySelector('.help-btn').classList.remove('hidden')
+        }else if(labelBadgeText === 'enhancement'){
+            labelBadge.classList.add('label-enhancement');
+            labelBadge.querySelector('.enhance-btn').classList.remove('hidden')
+        }
+        else if(labelBadgeText === 'good first issue'){
+            labelBadge.classList.add('label-first-issue');
+            labelBadge.querySelector('.first-issue-btn').classList.remove('hidden')
+        }
+        else if(labelBadgeText === 'documentation'){
+            labelBadge.classList.add('label-documentation');
+            labelBadge.querySelector('.documentation-btn').classList.remove('hidden')
+        }else{
+            labelBadge.classList.add('default-label');
+        }
+    })
+
+    // apend the card
+    cardContainer.appendChild(card);
   });
   manageCardCount();
 };
