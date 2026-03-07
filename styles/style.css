@@ -3,3 +3,8 @@
 }
 
 @import "tailwindcss";
+
+.active{
+    background-color: #3B25C1;
+    color: white;
+}
