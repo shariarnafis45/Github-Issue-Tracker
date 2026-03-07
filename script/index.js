@@ -1,4 +1,13 @@
+// manage card status
+const manageCardCount = () => {
+    const count = document.getElementById('cardCount');
+    const cardContainer = document.getElementById("card-container");
+    count.innerText = cardContainer.children.length;
+    
+} 
+
 // load all issue
+
 const loadAllIssues = async () => {
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
@@ -38,7 +47,7 @@ const displayAllIssues = (issues) => {
               </div>
               <!-- priority badge -->
               <div>
-                <div class="badge badge-soft badge-error">Error</div>
+                <div class="badge badge-soft badge-error priority-badge">${issue.priority}</div>
               </div>
             </div>
             <!-- content -->
@@ -59,8 +68,8 @@ const displayAllIssues = (issues) => {
             </div>
             <!-- author details -->
             <div class="mt-5 border-t-1 border-gray-300 pt-4 space-y-1">
-              <p class="text-gray-500">#1 by john_doe</p>
-              <p class="text-gray-500">1/15/2024</p>
+              <p class="text-gray-500">#${issue.id} by ${issue.author}</p>
+              <p class="text-gray-500">${new Date(issue.createdAt).toLocaleDateString()}</p>
             </div>
           </div>
         `;
@@ -69,12 +78,23 @@ const displayAllIssues = (issues) => {
     if(`${issue.status}` === 'open'){
       card.classList.add('border-open')
        card.querySelector('.open-icon').classList.remove('hidden');
+       
       
     }else{
         card.classList.add('border-close')
         card.querySelector('.close-icon').classList.remove('hidden');
     }
+
+    // priority badge color controll
+    if(`${issue.priority}` === 'high'){
+        card.querySelector('.priority-badge').classList.add('priority-high');
+    }else if (`${issue.priority}` === 'medium'){
+        card.querySelector('.priority-badge').classList.add('priority-medium');
+    }else {
+         card.querySelector('.priority-badge').classList.add('priority-low');
+    }
   });
+  manageCardCount();
 };
 
 loadAllIssues();
