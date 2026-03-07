@@ -8,3 +8,10 @@
     background-color: #3B25C1;
     color: white;
 }
+
+.border-open{
+    border-top: 5px solid #00A96E;
+}
+.border-close{
+    border-top: 5px solid #A855F7;
+}
