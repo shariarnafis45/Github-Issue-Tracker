@@ -1,10 +1,28 @@
 // manage card status
 const manageCardCount = () => {
-    const count = document.getElementById('cardCount');
-    const cardContainer = document.getElementById("card-container");
-    count.innerText = cardContainer.children.length;
-    
-} 
+  const count = document.getElementById("cardCount");
+  const cardContainer = document.getElementById("card-container");
+  count.innerText = cardContainer.children.length;
+};
+
+// create level badge item
+const createElement = (arr) => {
+  const element = arr.map(
+    (el) => `
+        <div class="badge badge-soft badge-error">
+            <span class="bug-btn hidden"><i class="fa-solid fa-bug"></i></span>
+            <span class="help-btn hidden"
+            ><i class="fa-solid fa-life-ring"></i
+            ></span>
+            <span class="enhance-btn hidden"><i class="fa-regular fa-star-half-stroke"></i></span>
+            <span class="first-issue-btn hidden"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="documentation-btn hidden"><i class="fa-brands fa-readme"></i></span>
+            <span class="font-medium">${el.toUpperCase()}</span>
+        </div>
+    `,
+  );
+  return element.join(' ');
+};
 
 // load all issue
 
@@ -19,9 +37,8 @@ const loadAllIssues = async () => {
 const displayAllIssues = (issues) => {
   const cardContainer = document.getElementById("card-container");
   issues.forEach((issue) => {
-    
     const card = document.createElement("div");
-    card.classList.add('p-8', 'shadow-lg', 'rounded-md')
+    card.classList.add("p-8", "shadow-lg", "rounded-lg");
     card.innerHTML = `
             <!-- card -->
           <div class="  ">
@@ -61,10 +78,8 @@ const displayAllIssues = (issues) => {
             </div>
             <!-- labels  -->
             <div class="mt-3">
-              <!-- badge load here dynamically -->
-              <div class="badge badge-soft badge-error">Error</div>
-              <div class="badge badge-soft badge-error">Error</div>
-              <div class="badge badge-soft badge-error">Error</div>
+              ${createElement(issue.labels)}
+                
             </div>
             <!-- author details -->
             <div class="mt-5 border-t-1 border-gray-300 pt-4 space-y-1">
@@ -75,23 +90,21 @@ const displayAllIssues = (issues) => {
         `;
     cardContainer.appendChild(card);
     // border add
-    if(`${issue.status}` === 'open'){
-      card.classList.add('border-open')
-       card.querySelector('.open-icon').classList.remove('hidden');
-       
-      
-    }else{
-        card.classList.add('border-close')
-        card.querySelector('.close-icon').classList.remove('hidden');
+    if (`${issue.status}` === "open") {
+      card.classList.add("border-open");
+      card.querySelector(".open-icon").classList.remove("hidden");
+    } else {
+      card.classList.add("border-close");
+      card.querySelector(".close-icon").classList.remove("hidden");
     }
 
     // priority badge color controll
-    if(`${issue.priority}` === 'high'){
-        card.querySelector('.priority-badge').classList.add('priority-high');
-    }else if (`${issue.priority}` === 'medium'){
-        card.querySelector('.priority-badge').classList.add('priority-medium');
-    }else {
-         card.querySelector('.priority-badge').classList.add('priority-low');
+    if (`${issue.priority}` === "high") {
+      card.querySelector(".priority-badge").classList.add("priority-high");
+    } else if (`${issue.priority}` === "medium") {
+      card.querySelector(".priority-badge").classList.add("priority-medium");
+    } else {
+      card.querySelector(".priority-badge").classList.add("priority-low");
     }
   });
   manageCardCount();
