@@ -1,76 +1,3 @@
-// spinner controll
-const controllSpinner = (value) => {
-  const spinner = document.getElementById('spinner');
-  
-  if(value){
-    spinner.classList.remove('hidden')
-  }else{
-    spinner.classList.add('hidden')
-  }
-}
-
-// remove active class from tab btn
-const removeActive = () => {
-  const filterBtn = document.querySelectorAll(".filter-tab-btn");
-  filterBtn.forEach((btn) => {
-    btn.classList.remove("active");
-  });
-};
-
-// Show Modal
-const showModalDetails = async (id)=> {
-  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
-  const data = await res.json();
-  const modalContentContainer = document.getElementById('modal-content-container');
-  modalContentContainer.innerHTML=`
-      <div class="">
-        <h2 class="text-xl font-bold">${data.data.title}</h2>
-        <div class="flex gap-1.5 mt-3">
-          <div class="badge badge-success">Opened</div>
-          <p class="text-gray-500">
-            &#8226; Opened by Fahim Ahmed &#8226;
-            <span>22/02/2026</span>
-          </p>
-        </div>
-        <div class="mt-4">
-          <!-- badge load here dynamically -->
-        </div>
-        <p class="text-gray-500 mt-4"></p>
-        <div class="flex gap-3 mt-5">
-          <div class="bg-gray-100 p-2 rounded-md w-full">
-            <p class="text-gray-500">Assignee:</p>
-            <h3 class="font-semibold">Fahim Ahmed</h3>
-          </div>
-          <div class="bg-gray-100 p-2 rounded-md w-full">
-            <p class="text-gray-500">Priority:</p>
-            <div class="badge badge-soft badge-error priority-badge">
-              high
-            </div>
-          </div>
-        </div>
-      </div>
-  `,
-
-  // Show the modal
-  document.getElementById('cardModal').showModal();
-}
-
-// event delegation in filter btn tab
-document
-  .getElementById("tab-btn-container")
-  .addEventListener("click", (event) => {
-    if (event.target.classList.contains("filter-tab-btn")) {
-      removeActive();
-      event.target.classList.add("active");
-    }
-  });
-// manage card status
-const manageCardCount = () => {
-  const count = document.getElementById("cardCount");
-  const cardContainer = document.getElementById("card-container");
-  count.innerText = cardContainer.children.length;
-};
-
 // create level badge item
 const createElement = (arr) => {
   const element = arr.map(
@@ -89,6 +16,132 @@ const createElement = (arr) => {
   );
   return element.join(" ");
 };
+// spinner controll
+const controllSpinner = (value) => {
+  const spinner = document.getElementById("spinner");
+
+  if (value) {
+    spinner.classList.remove("hidden");
+  } else {
+    spinner.classList.add("hidden");
+  }
+};
+
+// remove active class from tab btn
+const removeActive = () => {
+  const filterBtn = document.querySelectorAll(".filter-tab-btn");
+  filterBtn.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+};
+
+// Show Modal
+const showModalDetails = async (id) => {
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+  const data = await res.json();
+  const modalContentContainer = document.getElementById(
+    "modal-content-container",
+  );
+  ((modalContentContainer.innerHTML = `
+      <div class="">
+        <h2 class="text-xl font-bold">${data.data.title}</h2>
+        <div class="flex gap-1.5 mt-3">
+          <div class="badge badge-success border-none open-close-modal-badge">${data.data.status}</div>
+          <p class="text-gray-500">
+            &#8226; ${data.data.status} by ${data.data.author} &#8226;
+            <span>${new Date(data.data.createdAt).toLocaleDateString()}</span>
+          </p>
+        </div>
+        <div class="mt-4">
+          <!-- badge load here dynamically -->
+          ${createElement(data.data.labels)}
+        </div>
+        <p class="text-gray-500 mt-4">${data.data.description}</p>
+        <div class="flex gap-3 mt-5">
+          <div class="bg-gray-100 p-2 rounded-md w-full">
+            <p class="text-gray-500">Assignee:</p>
+            <h3 class="font-semibold">${data.data.author}</h3>
+          </div>
+          <div class="bg-gray-100 p-2 rounded-md w-full">
+            <p class="text-gray-500">Priority:</p>
+            <div class="badge badge-soft badge-error priority-badge">
+              ${data.data.priority}
+            </div>
+          </div>
+        </div>
+      </div>
+  `),
+    // Show the modal
+    document.getElementById("cardModal").showModal());
+
+  // border add
+  if (`${data.data.status}` === "open") {
+    document
+      .querySelector(".open-close-modal-badge")
+      .classList.add("badge-open");
+  } else {
+    document
+      .querySelector(".open-close-modal-badge")
+      .classList.add("badge-closed");
+  }
+
+  // priority badge color controll
+  if (`${data.data.priority}` === "high") {
+    modalContentContainer
+      .querySelector(".priority-badge")
+      .classList.add("priority-high");
+  } else if (`${data.data.priority}` === "medium") {
+    modalContentContainer
+      .querySelector(".priority-badge")
+      .classList.add("priority-medium");
+  } else {
+    modalContentContainer
+      .querySelector(".priority-badge")
+      .classList.add("priority-low");
+  }
+
+  // label style & icon controll
+  const labelBadges = modalContentContainer.querySelectorAll(".label-badge");
+  labelBadges.forEach((labelBadge) => {
+    const labelBadgeText = labelBadge.textContent.trim().toLocaleLowerCase();
+    if (labelBadgeText === "bug") {
+      labelBadge.classList.add("label-bug");
+      labelBadge.querySelector(".btn-bug").classList.remove("hidden");
+    } else if (labelBadgeText === "help wanted") {
+      labelBadge.classList.add("label-help");
+      labelBadge.querySelector(".help-btn").classList.remove("hidden");
+    } else if (labelBadgeText === "enhancement") {
+      labelBadge.classList.add("label-enhancement");
+      labelBadge.querySelector(".enhance-btn").classList.remove("hidden");
+    } else if (labelBadgeText === "good first issue") {
+      labelBadge.classList.add("label-first-issue");
+      labelBadge.querySelector(".first-issue-btn").classList.remove("hidden");
+    } else if (labelBadgeText === "documentation") {
+      labelBadge.classList.add("label-documentation");
+      labelBadge.querySelector(".documentation-btn").classList.remove("hidden");
+    } else {
+      labelBadge.classList.add("default-label");
+    }
+  });
+};
+
+// event delegation in filter btn tab
+document
+  .getElementById("tab-btn-container")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("filter-tab-btn")) {
+      removeActive();
+      event.target.classList.add("active");
+    }
+  });
+// manage card status
+const manageCardCount = () => {
+  const count = document.getElementById("cardCount");
+  const cardContainer = document.getElementById("card-container");
+  count.innerText = cardContainer.children.length;
+};
 
 // load all issue
 
@@ -102,7 +155,6 @@ const loadAllIssues = async () => {
 };
 
 const displayAllIssues = (issues) => {
-  
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   issues.forEach((issue) => {

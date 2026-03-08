@@ -66,3 +66,13 @@
     color: rgb(16, 15, 15);
 }
 
+
+.badge-open{
+        background-color: #00A96E;
+        color: white;
+}
+
+.badge-closed{
+    background-color: #A855F7;
+    color: white;
+}
