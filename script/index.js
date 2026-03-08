@@ -285,3 +285,23 @@ const loadClosedIssue = async () => {
 };
 
 loadAllIssues();
+
+// search fuctionality
+document.getElementById("search-btn").addEventListener("click", async () => {
+  const searchInput = document.getElementById("search-input").value;
+  if (searchInput.length === 0) {
+    loadAllIssues();
+    return;
+  }
+  controllSpinner(true);
+  // load data
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInput}`,
+  );
+  const data = await res.json();
+  removeActive();
+  if(data.data.length === 0){
+    alert('Issues Not Found')
+  }
+  displayAllIssues(data.data);
+});
