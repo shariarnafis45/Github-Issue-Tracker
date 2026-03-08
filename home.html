@@ -121,17 +121,35 @@
         class="w-11/12 mx-auto shadow-md p-6 bg-white border-t-1 border-gray-300 rounded-md"
       >
         <!--Issue card container -->
-        
+
         <div id="spinner" class="flex justify-center mt-20 hidden">
-          <span  class="loading loading-spinner text-primary "></span>
+          <span class="loading loading-spinner text-primary"></span>
         </div>
         <div
           id="card-container"
-          class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-        </div>
+          class="grid md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        ></div>
       </section>
-      
+
+      <!-- modal -->
+      <section>
+        <!-- Open the modal using ID.showModal() method -->
+        
+        <dialog id="cardModal" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <!-- modal content -->
+            <div id="modal-content-container">
+              <!--modal load here dynamically -->
+            </div>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-primary">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </section>
     </main>
 
     <!-- js file -->

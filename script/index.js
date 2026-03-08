@@ -1,7 +1,7 @@
 // spinner controll
 const controllSpinner = (value) => {
   const spinner = document.getElementById('spinner');
-  console.log(spinner)
+  
   if(value){
     spinner.classList.remove('hidden')
   }else{
@@ -16,6 +16,44 @@ const removeActive = () => {
     btn.classList.remove("active");
   });
 };
+
+// Show Modal
+const showModalDetails = async (id)=> {
+  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+  const data = await res.json();
+  const modalContentContainer = document.getElementById('modal-content-container');
+  modalContentContainer.innerHTML=`
+      <div class="">
+        <h2 class="text-xl font-bold">${data.data.title}</h2>
+        <div class="flex gap-1.5 mt-3">
+          <div class="badge badge-success">Opened</div>
+          <p class="text-gray-500">
+            &#8226; Opened by Fahim Ahmed &#8226;
+            <span>22/02/2026</span>
+          </p>
+        </div>
+        <div class="mt-4">
+          <!-- badge load here dynamically -->
+        </div>
+        <p class="text-gray-500 mt-4"></p>
+        <div class="flex gap-3 mt-5">
+          <div class="bg-gray-100 p-2 rounded-md w-full">
+            <p class="text-gray-500">Assignee:</p>
+            <h3 class="font-semibold">Fahim Ahmed</h3>
+          </div>
+          <div class="bg-gray-100 p-2 rounded-md w-full">
+            <p class="text-gray-500">Priority:</p>
+            <div class="badge badge-soft badge-error priority-badge">
+              high
+            </div>
+          </div>
+        </div>
+      </div>
+  `,
+
+  // Show the modal
+  document.getElementById('cardModal').showModal();
+}
 
 // event delegation in filter btn tab
 document
@@ -72,7 +110,7 @@ const displayAllIssues = (issues) => {
     card.classList.add("p-8", "shadow-lg", "rounded-lg");
     card.innerHTML = `
             <!-- card -->
-          <div class="  ">
+          <div onclick="showModalDetails(${issue.id})" class="  ">
             <!-- icon + priority badge-->
             <div class="flex justify-between">
               <div class="flex">
