@@ -288,7 +288,7 @@ loadAllIssues();
 
 // search fuctionality
 document.getElementById("search-btn").addEventListener("click", async () => {
-  const searchInput = document.getElementById("search-input").value;
+  const searchInput = document.getElementById("search-input").value.toUpperCase();
   if (searchInput.length === 0) {
     loadAllIssues();
     return;
