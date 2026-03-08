@@ -1,3 +1,14 @@
+// spinner controll
+const controllSpinner = (value) => {
+  const spinner = document.getElementById('spinner');
+  console.log(spinner)
+  if(value){
+    spinner.classList.remove('hidden')
+  }else{
+    spinner.classList.add('hidden')
+  }
+}
+
 // remove active class from tab btn
 const removeActive = () => {
   const filterBtn = document.querySelectorAll(".filter-tab-btn");
@@ -44,6 +55,7 @@ const createElement = (arr) => {
 // load all issue
 
 const loadAllIssues = async () => {
+  controllSpinner(true);
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
@@ -52,6 +64,7 @@ const loadAllIssues = async () => {
 };
 
 const displayAllIssues = (issues) => {
+  
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   issues.forEach((issue) => {
@@ -154,11 +167,13 @@ const displayAllIssues = (issues) => {
     // apend the card
     cardContainer.appendChild(card);
   });
+  controllSpinner(false);
   manageCardCount();
 };
 
 // open tab btn controll
 const loadOpenIssue = async () => {
+  controllSpinner(true);
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
@@ -169,6 +184,7 @@ const loadOpenIssue = async () => {
 };
 // close tab btn controll
 const loadClosedIssue = async () => {
+  controllSpinner(true);
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );

@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GitHub Issue Tracker | Home</title>
+    <!-- favicon -->
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
     <!-- Google font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,7 +61,7 @@
       </nav>
     </header>
     <main class="">
-      <section id="tab-btn-container" class=" w-11/12 mx-auto shadow-md mt-10">
+      <section id="tab-btn-container" class="w-11/12 mx-auto shadow-md mt-10">
         <!-- name of each tab group should be unique -->
         <div
           class="tabs tabs-box flex md:justify-start justify-center p-4 gap-4"
@@ -64,7 +70,7 @@
             onclick="loadAllIssues()"
             type="radio"
             name="all-tab"
-            class="tab px-10  filter-tab-btn active shadow-md"
+            class="tab px-10 filter-tab-btn active shadow-md"
             aria-label="All"
           />
           <input
@@ -115,11 +121,17 @@
         class="w-11/12 mx-auto shadow-md p-6 bg-white border-t-1 border-gray-300 rounded-md"
       >
         <!--Issue card container -->
+        
+        <div id="spinner" class="flex justify-center mt-20 hidden">
+          <span  class="loading loading-spinner text-primary "></span>
+        </div>
         <div
           id="card-container"
           class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        ></div>
+        >
+        </div>
       </section>
+      
     </main>
 
     <!-- js file -->
