@@ -55,7 +55,7 @@
       </nav>
     </header>
     <main class="">
-      <section class="tab-btn-container w-11/12 mx-auto shadow-md mt-10">
+      <section id="tab-btn-container" class=" w-11/12 mx-auto shadow-md mt-10">
         <!-- name of each tab group should be unique -->
         <div
           class="tabs tabs-box flex md:justify-start justify-center p-4 gap-4"
@@ -64,21 +64,21 @@
             onclick="loadAllIssues()"
             type="radio"
             name="all-tab"
-            class="tab px-10 active"
+            class="tab px-10  filter-tab-btn active shadow-md"
             aria-label="All"
           />
           <input
             onclick="loadOpenIssue()"
             type="radio"
             name="open-tab"
-            class="tab px-10 border border-gray-300"
+            class="tab px-10 border border-gray-300 filter-tab-btn shadow-md"
             aria-label="Open"
           />
           <input
             onclick="loadClosedIssue()"
             type="radio"
             name="close-tab"
-            class="tab px-10 border border-gray-300"
+            class="tab px-10 border border-gray-300 filter-tab-btn shadow-md"
             aria-label="Closed"
           />
         </div>

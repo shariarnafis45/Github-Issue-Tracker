@@ -4,6 +4,12 @@
 
 @import "tailwindcss";
 
+.filter-tab-btn {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
 .active{
     background-color: #3B25C1;
     color: white;
@@ -59,3 +65,4 @@
     background-color: #6B7280;
     color: rgb(16, 15, 15);
 }
+

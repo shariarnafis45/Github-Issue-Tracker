@@ -1,3 +1,20 @@
+// remove active class from tab btn
+const removeActive = () => {
+  const filterBtn = document.querySelectorAll(".filter-tab-btn");
+  filterBtn.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+};
+
+// event delegation in filter btn tab
+document
+  .getElementById("tab-btn-container")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("filter-tab-btn")) {
+      removeActive();
+      event.target.classList.add("active");
+    }
+  });
 // manage card status
 const manageCardCount = () => {
   const count = document.getElementById("cardCount");
@@ -21,7 +38,7 @@ const createElement = (arr) => {
         </div>
     `,
   );
-  return element.join(' ');
+  return element.join(" ");
 };
 
 // load all issue
@@ -36,7 +53,7 @@ const loadAllIssues = async () => {
 
 const displayAllIssues = (issues) => {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = '';
+  cardContainer.innerHTML = "";
   issues.forEach((issue) => {
     const card = document.createElement("div");
     card.classList.add("p-8", "shadow-lg", "rounded-lg");
@@ -89,7 +106,7 @@ const displayAllIssues = (issues) => {
             </div>
           </div>
         `;
-    
+
     // border add
     if (`${issue.status}` === "open") {
       card.classList.add("border-open");
@@ -109,30 +126,30 @@ const displayAllIssues = (issues) => {
     }
 
     // label style & icon controll
-    const labelBadges = card.querySelectorAll('.label-badge');
-    labelBadges.forEach(labelBadge => {
-        const labelBadgeText = labelBadge.textContent.trim().toLocaleLowerCase();
-        if(labelBadgeText === 'bug'){
-            labelBadge.classList.add('label-bug');
-            labelBadge.querySelector('.btn-bug').classList.remove('hidden')
-        }else if(labelBadgeText === 'help wanted'){
-            labelBadge.classList.add('label-help');
-            labelBadge.querySelector('.help-btn').classList.remove('hidden')
-        }else if(labelBadgeText === 'enhancement'){
-            labelBadge.classList.add('label-enhancement');
-            labelBadge.querySelector('.enhance-btn').classList.remove('hidden')
-        }
-        else if(labelBadgeText === 'good first issue'){
-            labelBadge.classList.add('label-first-issue');
-            labelBadge.querySelector('.first-issue-btn').classList.remove('hidden')
-        }
-        else if(labelBadgeText === 'documentation'){
-            labelBadge.classList.add('label-documentation');
-            labelBadge.querySelector('.documentation-btn').classList.remove('hidden')
-        }else{
-            labelBadge.classList.add('default-label');
-        }
-    })
+    const labelBadges = card.querySelectorAll(".label-badge");
+    labelBadges.forEach((labelBadge) => {
+      const labelBadgeText = labelBadge.textContent.trim().toLocaleLowerCase();
+      if (labelBadgeText === "bug") {
+        labelBadge.classList.add("label-bug");
+        labelBadge.querySelector(".btn-bug").classList.remove("hidden");
+      } else if (labelBadgeText === "help wanted") {
+        labelBadge.classList.add("label-help");
+        labelBadge.querySelector(".help-btn").classList.remove("hidden");
+      } else if (labelBadgeText === "enhancement") {
+        labelBadge.classList.add("label-enhancement");
+        labelBadge.querySelector(".enhance-btn").classList.remove("hidden");
+      } else if (labelBadgeText === "good first issue") {
+        labelBadge.classList.add("label-first-issue");
+        labelBadge.querySelector(".first-issue-btn").classList.remove("hidden");
+      } else if (labelBadgeText === "documentation") {
+        labelBadge.classList.add("label-documentation");
+        labelBadge
+          .querySelector(".documentation-btn")
+          .classList.remove("hidden");
+      } else {
+        labelBadge.classList.add("default-label");
+      }
+    });
 
     // apend the card
     cardContainer.appendChild(card);
@@ -142,21 +159,23 @@ const displayAllIssues = (issues) => {
 
 // open tab btn controll
 const loadOpenIssue = async () => {
-  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const res = await fetch(
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+  );
   const data = await res.json();
   const issues = data.data;
-  const openIssue = issues.filter(issue => (issue.status === 'open'));
+  const openIssue = issues.filter((issue) => issue.status === "open");
   displayAllIssues(openIssue);
-  
-}
+};
 // close tab btn controll
 const loadClosedIssue = async () => {
-  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const res = await fetch(
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+  );
   const data = await res.json();
   const issues = data.data;
-  const closeIssue = issues.filter(issue => (issue.status === 'closed'));
+  const closeIssue = issues.filter((issue) => issue.status === "closed");
   displayAllIssues(closeIssue);
-  
-}
+};
 
 loadAllIssues();
