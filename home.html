@@ -61,20 +61,23 @@
           class="tabs tabs-box flex md:justify-start justify-center p-4 gap-4"
         >
           <input
+            onclick="loadAllIssues()"
             type="radio"
             name="all-tab"
             class="tab px-10 active"
             aria-label="All"
           />
           <input
+            onclick="loadOpenIssue()"
             type="radio"
-            name="my_tabs_1"
+            name="open-tab"
             class="tab px-10 border border-gray-300"
             aria-label="Open"
           />
           <input
+            onclick="loadClosedIssue()"
             type="radio"
-            name="my_tabs_1"
+            name="close-tab"
             class="tab px-10 border border-gray-300"
             aria-label="Closed"
           />
@@ -88,8 +91,10 @@
           <div class="flex items-center gap-3">
             <!-- <div class="bg-gray-300 p-2 rounded-full flex justify-center items-center">
             </div> -->
-            <div class="bg-[#ECE4FF] p-2 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-circle-radiation text-primary text-3xl"></i>
+            <div
+              class="bg-[#ECE4FF] p-2 rounded-full flex items-center justify-center"
+            >
+              <i class="fa-solid fa-circle-radiation text-primary text-3xl"></i>
             </div>
             <div>
               <h2 class="text-2xl font-medium">
@@ -113,9 +118,7 @@
         <div
           id="card-container"
           class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          
-        </div>
+        ></div>
       </section>
     </main>
 

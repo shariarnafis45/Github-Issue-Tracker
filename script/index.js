@@ -9,7 +9,7 @@ const manageCardCount = () => {
 const createElement = (arr) => {
   const element = arr.map(
     (el) => `
-        <div class="badge badge-soft badge-error label-badge mr-1.5">
+        <div class="badge badge-soft badge-error label-badge mr-1.5 mt-2">
             <span class="btn-bug hidden"><i class="fa-solid fa-bug"></i></span>
             <span class="help-btn hidden"
             ><i class="fa-solid fa-life-ring"></i
@@ -36,6 +36,7 @@ const loadAllIssues = async () => {
 
 const displayAllIssues = (issues) => {
   const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = '';
   issues.forEach((issue) => {
     const card = document.createElement("div");
     card.classList.add("p-8", "shadow-lg", "rounded-lg");
@@ -138,5 +139,24 @@ const displayAllIssues = (issues) => {
   });
   manageCardCount();
 };
+
+// open tab btn controll
+const loadOpenIssue = async () => {
+  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const data = await res.json();
+  const issues = data.data;
+  const openIssue = issues.filter(issue => (issue.status === 'open'));
+  displayAllIssues(openIssue);
+  
+}
+// close tab btn controll
+const loadClosedIssue = async () => {
+  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const data = await res.json();
+  const issues = data.data;
+  const closeIssue = issues.filter(issue => (issue.status === 'closed'));
+  displayAllIssues(closeIssue);
+  
+}
 
 loadAllIssues();
